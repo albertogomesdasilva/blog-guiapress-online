@@ -1,0 +1,51 @@
+<%- include ../../partials/header.ejs %>
+<body>
+    <%- include ../../partials/navbar.ejs %>
+    <div class="container">
+        <hr>
+        <div class="container">
+            <p>>>>>> <%= url %></p>
+            <hr>
+            <h1> Categorias </h1>
+            <a href="/admin/categories/new" class="btn btn-success">Nova categoria</a>
+            <hr>
+          <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>SLUG</th>
+                    <th>DATA</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(category => { %> 
+                    
+                    <tr>
+                        <th><%= category.id %></th>
+                        <th><%= category.title %></th>
+                        <th><%= category.slug %></th>
+                        <th><%= moment(category.createdAt).format('DD/MM/YY: HH:MM') %></th>
+                        <th>
+                            
+                            <button class="btn btn-warning">Editar</button>
+
+                           <form method="post" action="/categories/delete" style="display:inline">
+                            <input type="hidden" name="id" value="<%= category.id %>">   
+                            <button class="btn btn-danger">Deletar</button>
+
+                           </form>
+                           
+
+                        </th>
+                    </tr>
+                <% }) %>
+            </tbody>
+          </table>
+
+        </div>
+        <hr>
+  
+</body>
+<%- include ../../partials/footer.ejs %>
