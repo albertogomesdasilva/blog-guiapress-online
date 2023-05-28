@@ -29,14 +29,13 @@
                         <th><%= moment(category.createdAt).format('DD/MM/YY: HH:MM') %></th>
                         <th>
                             
-                            <button class="btn btn-warning">Editar</button>
+                            <!-- <button class="btn btn-warning">Editar</button> -->
+                            <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
 
-                           <form method="post" action="/categories/delete" style="display:inline">
+                           <form method="post" action="/categories/delete" style="display:inline" onsubmit="confirmacao(event, this)">
                             <input type="hidden" name="id" value="<%= category.id %>">   
                             <button class="btn btn-danger">Deletar</button>
-
                            </form>
-                           
 
                         </th>
                     </tr>
@@ -49,3 +48,24 @@
   
 </body>
 <%- include ../../partials/footer.ejs %>
+
+
+<script>
+    function confirmacao(event, form) {
+        event.preventDefault()
+
+        //console.log("O formulário não foi enviado!")
+        var res = confirm("Deseja mesmo Deletar o Registro?")
+            if(res) {
+                //console.log('Confirmo a Deleção!')
+                alert('Registro Apagado com Sucesso!')
+                form.submit()
+
+            }else{
+                alert('Cancelado. O registro não foi apagado.')
+
+            }
+    }
+    
+
+</script>
